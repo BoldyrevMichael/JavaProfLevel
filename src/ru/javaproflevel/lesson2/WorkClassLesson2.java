@@ -60,11 +60,12 @@ public class WorkClassLesson2 {
         disconnect();
     }
 
-    public static void handleRequest(BufferedReader in, String msg) throws Exception {
+    public static void handleRequest(BufferedReader in, String msg) throws Exception{
 
         String[] tokens = msg.split(DELIMITER);
         if (tokens.length < 2 || tokens.length > 3 || tokens[0].equals(EXIT)) {
-            in.close();
+            //in.close();
+            System.out.println("Ошибка в команде");
             return;
         }
         String type = tokens[0];
@@ -87,40 +88,51 @@ public class WorkClassLesson2 {
                 }
                 break;
             case CHANGE_COST_REQUEST:
-                ps = connection.prepareStatement("UPDATE Products SET cost = ? WHERE title = ?");
-                ps.setDouble(1, Double.parseDouble(tokens[2]));
-                ps.setString(2, tokens[1]);
-                ps.executeUpdate();
                 ps = connection.prepareStatement("SELECT * FROM Products WHERE title = ?");
                 ps.setString(1, tokens[1]);
                 ResultSet res2 = ps.executeQuery();
-                while (res2.next()) {
-                    System.out.println(
-                            res2.getInt("id")
-                                    + " " + res2.getInt("prodid")
-                                    + " " + res2.getString("title")
-                                    + " " + res2.getDouble("cost")
-                    );
+                if (!res2.next()) {
+                    System.out.println("Такого товара нет");
                 }
+                if (isNumber(tokens[2])) {
+                    ps = connection.prepareStatement("UPDATE Products SET cost = ? WHERE title = ?");
+                    ps.setDouble(1, Double.parseDouble(tokens[2]));
+                    ps.setString(2, tokens[1]);
+                    ps.executeUpdate();
+                    ps = connection.prepareStatement("SELECT * FROM Products WHERE title = ?");
+                    ps.setString(1, tokens[1]);
+                    ResultSet res22 = ps.executeQuery();
+                    while (res22.next()) {
+                        System.out.println(
+                                res22.getInt("id")
+                                        + " " + res22.getInt("prodid")
+                                        + " " + res22.getString("title")
+                                        + " " + res22.getDouble("cost")
+                        );
+                    }
+                }
+                else System.out.println("Ошибка в команде");
                 break;
             case COST_RANGE_REQUEST:
-                ps = connection.prepareStatement("SELECT * FROM Products WHERE cost >= ? AND cost <= ?");
-                ps.setDouble(1, Double.parseDouble(tokens[1]));
-                ps.setDouble(2, Double.parseDouble(tokens[2]));
-                ResultSet res3 = ps.executeQuery();
-                while (res3.next()) {
-                    System.out.println(
-                            res3.getInt("id")
-                                    + " " + res3.getInt("prodid")
-                                    + " " + res3.getString("title")
-                                    + " " + res3.getDouble("cost")
-                    );
-                }
-                break;
+                if (isNumber(tokens[1]) && isNumber(tokens[2])) {
+                    ps = connection.prepareStatement("SELECT * FROM Products WHERE cost >= ? AND cost <= ?");
+                    ps.setDouble(1, Double.parseDouble(tokens[1]));
+                    ps.setDouble(2, Double.parseDouble(tokens[2]));
+                    ResultSet res3 = ps.executeQuery();
+                    while (res3.next()) {
+                        System.out.println(
+                                res3.getInt("id")
+                                        + " " + res3.getInt("prodid")
+                                        + " " + res3.getString("title")
+                                        + " " + res3.getDouble("cost")
+                        );
+                    }
 
+                }
+                else System.out.println("Ошибка в команде");
+                break;
             default:
-                System.out.println("Ошибка в команде");
-                ;
+                System.out.println("Неизвестная команда");
         }
     }
 
@@ -142,5 +154,12 @@ public class WorkClassLesson2 {
         }
     }
 
+    public static boolean isNumber(String str) {
+        if (str == null || str.isEmpty()) return false;
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) return false;
+        }
+        return true;
+    }
 
 }
