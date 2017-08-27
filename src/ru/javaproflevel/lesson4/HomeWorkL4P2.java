@@ -15,8 +15,6 @@ public class HomeWorkL4P2 {
 
             byte[] bytesToWrite = s.getBytes();
             fos.write(bytesToWrite);
-            fos.flush();
-            fos.close();
         } catch (IOException ex) {
             System.out.println("Ошибка ввода-вывода");
         }
@@ -53,8 +51,6 @@ public class HomeWorkL4P2 {
         try (FileOutputStream fos = new FileOutputStream(file, true)) {
             byte[] bytesToWrite = text.getBytes();
             fos.write(bytesToWrite);
-            fos.flush();
-            fos.close();
         } catch (IOException ex) {
             System.out.println("Ошибка ввода-вывода");
         }
