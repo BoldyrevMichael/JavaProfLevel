@@ -27,18 +27,33 @@ public class HomeWorkL4P2 {
         Thread t1 = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 w.wrightFile(" 1п-" + str[i]);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         Thread t2 = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 w.wrightFile(" 2п-" + str[i]);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         Thread t3 = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 w.wrightFile(" 3п-" + str[i]);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         t1.start();
