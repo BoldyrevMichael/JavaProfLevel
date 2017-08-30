@@ -9,21 +9,21 @@ public class Mfu {
         for (int i = 0; i < 10; i++) {
             int finalI = i;
             Thread t1 = new Thread(() -> {
-                try {
+                /*try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
                 m.print(finalI + 1);
             });
             t1.start();
 
             Thread t2 = new Thread(() -> {
-                try {
+                /*try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
                 m.scun(finalI + 1);
             });
             t2.start();
@@ -34,12 +34,22 @@ public class Mfu {
 
     public void print(int page) {
         synchronized (obj1) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Отпечатано " + page + " страниц");
         }
     }
 
     public void scun(int page) {
         synchronized (obj2) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Отсканировано " + page + " страниц");
         }
     }
