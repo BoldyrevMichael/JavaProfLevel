@@ -60,7 +60,7 @@ public class WorkClassLesson2 {
         disconnect();
     }
 
-    public static void handleRequest(BufferedReader in, String msg) throws Exception{
+    public static void handleRequest(BufferedReader in, String msg) throws Exception {
 
         String[] tokens = msg.split(DELIMITER);
         if (tokens.length < 2 || tokens.length > 3 || tokens[0].equals(EXIT)) {
@@ -110,8 +110,7 @@ public class WorkClassLesson2 {
                                         + " " + res22.getDouble("cost")
                         );
                     }
-                }
-                else System.out.println("Ошибка в команде");
+                } else System.out.println("Ошибка в команде");
                 break;
             case COST_RANGE_REQUEST:
                 if (isNumber(tokens[1]) && isNumber(tokens[2])) {
@@ -128,8 +127,7 @@ public class WorkClassLesson2 {
                         );
                     }
 
-                }
-                else System.out.println("Ошибка в команде");
+                } else System.out.println("Ошибка в команде");
                 break;
             default:
                 System.out.println("Неизвестная команда");
