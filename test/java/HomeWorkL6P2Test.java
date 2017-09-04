@@ -16,8 +16,8 @@ public class HomeWorkL6P2Test {
         return Arrays.asList(
                 new Object[][]{
 
-                        {new boolean[]{true}, new int[]{1, 1, 1, 1, 1, 1, 1}},
-                        {new boolean[]{true}, new int[]{4, 4, 4, 4, 4, 4, 4}},
+                        {new boolean[]{false}, new int[]{1, 1, 1, 1, 1, 1, 1}},
+                        {new boolean[]{false}, new int[]{4, 4, 4, 4, 4, 4, 4}},
                         {new boolean[]{true}, new int[]{1, 4, 1, 4, 1, 4, 1}},
                         {new boolean[]{false}, new int[]{0, 2, 3, 5, 6, 7, 8}},
                         {new boolean[]{false}, new int[]{4, 1, 4, 1, 4, 1, 0}}
