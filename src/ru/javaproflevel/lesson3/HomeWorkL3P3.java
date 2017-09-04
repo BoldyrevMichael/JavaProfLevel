@@ -19,14 +19,17 @@ public class HomeWorkL3P3 {
         File f = new File("TD3times.txt");
         long n = f.length();
         byte [] bytes = new byte[1800];
-        StringBuilder sb = new StringBuilder();
+        //StringBuilder sb = new StringBuilder();
+
         RandomAccessFile raf = new RandomAccessFile(f,"rw");
         raf.seek((pageNumber*1800)-1800);
         raf.read(bytes,0,1800);
-        for (int i = 0; i < 1800; i++) {
+        /*for (int i = 0; i < 1800; i++) {
            sb.append((char)bytes[i]);
-        }
-        System.out.println(sb.toString());
+        }*/
+        String sb1 = new String(bytes);
+        //System.out.println(sb.toString());
+        System.out.println(sb1);
     }
 
 }

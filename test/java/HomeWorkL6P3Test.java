@@ -30,7 +30,7 @@ public class HomeWorkL6P3Test {
 
         stmt.execute("DELETE FROM Students");
         stmt.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='Students';");
-        connection.setAutoCommit(false);
+       connection.setAutoCommit(false);
         ps = connection.prepareStatement("INSERT INTO Students (id, surname, mark) VALUES (?, ?, ?)");
         for (int i = 1; i < 10; i++) {
             ps.setInt(1, i);
@@ -38,8 +38,8 @@ public class HomeWorkL6P3Test {
             ps.setInt(3, (int) (Math.random() * 100));
             ps.executeUpdate();
         }
-        connection.commit();
-       // sp = connection.setSavepoint();
+       connection.commit();
+       //sp = connection.setSavepoint();
 
         ps = connection.prepareStatement("SELECT mark  FROM Students WHERE surname = ?");
         ps.setString(1, "Студент1");
