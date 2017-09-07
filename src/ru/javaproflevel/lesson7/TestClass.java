@@ -115,6 +115,10 @@ public class TestClass {
             int res = 0;
             if (m.isAnnotationPresent(Test.class) && o.m.isAnnotationPresent(Test.class)) {
                 res = -(m.getAnnotation(Test.class).priority() - o.m.getAnnotation(Test.class).priority());
+            } else if (m.isAnnotationPresent(Test.class) && o.m.isAnnotationPresent(BeforeSuite.class)) {
+                res = 100;
+            } else if (m.isAnnotationPresent(Test.class) && o.m.isAnnotationPresent(AfterSuite.class)) {
+                res = -100;
             } else if (m.isAnnotationPresent(BeforeSuite.class) && o.m.isAnnotationPresent(Test.class)) {
                 res = -100;
             } else if (m.isAnnotationPresent(AfterSuite.class) && o.m.isAnnotationPresent(Test.class)) {
